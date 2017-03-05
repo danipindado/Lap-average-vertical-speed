@@ -1,6 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Application as App;
 using Toybox.System as Sys;
+using Toybox.Application as App;
 
 class MyDataField extends Ui.SimpleDataField
 {
@@ -13,6 +14,7 @@ class MyDataField extends Ui.SimpleDataField
     hidden var _M_previousAscent;
 
     hidden var _M_paused;
+    hidden var app;
 
     hidden static const _C_scale = [
         1.0, // convert from meters to meters
@@ -21,6 +23,8 @@ class MyDataField extends Ui.SimpleDataField
 
     function initialize() {
         SimpleDataField.initialize();
+        app = App.getApp();
+        
         label = Ui.loadResource(Rez.Strings.AppName);
 
         // maybe this should be derived from info.timerState?
@@ -117,11 +121,14 @@ class MyDataField extends Ui.SimpleDataField
     }
 
     hidden function reset() {
-        _M_accumulatedTime = 0;
-        _M_accumulatedAscent = 0;
-
-        _M_previousTime = null;
-        _M_previousAscent = null;
+        //reset lap variables if necessary
+        if(app.getProperty("lapReset"))
+        {
+            _M_accumulatedTime = 0;
+            _M_accumulatedAscent = 0;
+            _M_previousTime = null;
+            _M_previousAscent = null;
+        }
     }
 
     function onTimerStop() {
