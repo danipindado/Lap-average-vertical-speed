@@ -1,4 +1,4 @@
 <strings>
-    <string id="AppName">Average vertical speed</string>
-    <string id="lapReset">reset every lap</string>
+    <string id="AppName">Average Vertical Speed</string>
+    <string id="lapReset">reset after every lap?</string>
 </strings>
